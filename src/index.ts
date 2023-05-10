@@ -1,3 +1,7 @@
+
+
+// import * as dotenv from 'dotenv';
+// dotenv.config({ path: __dirname+'./env' });
 import express from 'express';
 import http from 'http'
 import bodyParser from 'body-parser';
@@ -22,14 +26,12 @@ app.use(bodyParser.json());
 const server = http.createServer(app);
 
 server.listen(8080, () => {
-    console.log('Server running on http://localhost:8080/');
+    console.log('Server running on http://localhost:8080');
 });
-
-const MONGO_URL = "mongodb+srv://nodejstypescript:DxjjoQ1jk644Nvee@cluster0.9zxqjjv.mongodb.net/?retryWrites=true&w=majority"
 
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGO_URL);
+mongoose.connect(process.env.MONGO_URL);
 mongoose.connection.on('error', (error: Error) => console.log(error));
 
 app.use('/', router());
