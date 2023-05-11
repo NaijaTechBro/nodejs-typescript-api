@@ -1,7 +1,4 @@
-
-
-// import * as dotenv from 'dotenv';
-// dotenv.config({ path: __dirname+'./env' });
+import dotenv from 'dotenv';
 import express from 'express';
 import http from 'http'
 import bodyParser from 'body-parser';
@@ -10,6 +7,7 @@ import compression from 'compression';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import router from './router';
+dotenv.config();
 
 
 const app = express()
@@ -25,10 +23,9 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
-server.listen(8080, () => {
-    console.log('Server running on http://localhost:8080');
+server.listen(process.env.PORT, () => {
+    console.log(`Server running on ${process.env.PORT}`);
 });
-
 
 mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGO_URL);
